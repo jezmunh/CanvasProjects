@@ -30,13 +30,13 @@ function circle(color, x, y, fill = false) {
 }
 
 function generate() {
-circle("red", 70, 50, current == 0);
-circle("yellow", 70, 150, current == 1);
-circle("green", 70, 250, current == 2);
-current++;
-if(current > 2) {
-    current = 0;
-}
+    circle("red", 70, 50, current == 0);
+    circle("yellow", 70, 150, current == 1);
+    circle("green", 70, 250, current == 2);
+    current++;
+    if(current > 2) {
+        current = 0;
+    }
 
 }
 setInterval(() => {
