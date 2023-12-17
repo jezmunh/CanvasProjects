@@ -4,24 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
-        body {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: black;
-        }
-        canvas {
-            border: 1px solid white;
-        }
-    </style>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
+    <h1>Score:<span id="score">0</span></h1>
+    <h1>Highest score:<span id="highscore">0</span></h1>
     <canvas id="game"></canvas>
     <script src="main.js"></script>
 </body>

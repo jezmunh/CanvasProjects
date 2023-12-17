@@ -1,5 +1,7 @@
 let canvas = document.getElementById("game");
 let context = canvas.getContext("2d");
+let score = document.getElementById('score');
+let highscore = document.getElementById('highscore');
 
 canvas.width = 400;
 canvas.height = 400;
@@ -21,6 +23,8 @@ let eat = {
     y: 0,
 };
 
+let scoreAmount = 0;
+
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min))  + min;
 }
@@ -40,6 +44,13 @@ function start() {
     drawSnake();
     drawEat();
     finish();
+
+    if(localStorage.getItem('highscore') != '' || localStorage.getItem('highscore') != null) {        
+    
+        highscore.innerHTML = localStorage.getItem('highscore');
+    } else {
+        localStorage.setItem('highscore', 0);
+    }
 }
 
 function drawEat () {
@@ -49,6 +60,8 @@ function drawEat () {
         snake.countTails++;        
         eat.x = getRandomInt(0, canvas.width / grid) * grid;
         eat.y = getRandomInt(0, canvas.height / grid) * grid;
+        scoreAmount++;
+        score.innerHTML = scoreAmount;
     }
 }
 
@@ -90,21 +103,31 @@ function finish() {
                 snake.countTails = 4;
                 snake.dx = grid;
                 snake.dy = 0;
+
+                
+
+                if(scoreAmount > localStorage.getItem('highscore')) {
+                    localStorage.setItem('highscore', scoreAmount)
+                }
+
+                scoreAmount = 0;
+                score.innerHTML = scoreAmount;
             }
         }
     }
+    
 }
 document.addEventListener("keydown", (e) => {
-    if (e.code == "KeyA" && snake.dx == 0) {
+    if (e.code == "KeyA" || e.code == "ArrowLeft" && snake.dx == 0) {
         snake.dx = -grid;
         snake.dy = 0;
-    } else if (e.code == 'KeyW' && snake.dy == 0) {
+    } else if (e.code == 'KeyW'|| e.code == "ArrowUp" && snake.dy == 0) {
         snake.dx = 0;
         snake.dy = -grid;
-    } else if (e.code == 'KeyD' && snake.dx == 0) {
+    } else if (e.code == 'KeyD' || e.code == "ArrowRight" && snake.dx == 0) {
         snake.dx = grid;
         snake.dy = 0;
-    } else if (e.code == 'KeyS' && snake.dy == 0) {
+    } else if (e.code == 'KeyS' || e.code == "ArrowDown" && snake.dy == 0) {
         snake.dx = 0;
         snake.dy = grid;
     }
